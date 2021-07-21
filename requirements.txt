@@ -1,0 +1,5 @@
+glslangValidator - GLSL compiler
+
+sudo apt install vulkan-tools - cmd line utilities
+sudo apt install libvulkan-dev - vulkan loader
+sudo apt install vulkan-validationlayers-dev spirv-tools - standard validation layer and required SPIR-V tools

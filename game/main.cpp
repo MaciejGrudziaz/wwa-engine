@@ -1,8 +1,9 @@
 #include <iostream>
 
-#include <graphics/init.h>
+#include <graphics/ApplicationWindow.h>
 
 int main() {
-    createWindow();
+    graphics::ApplicationWindow app("Vulkan", 800, 600);
+    app.run();
     return 0;
 }
