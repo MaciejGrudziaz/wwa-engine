@@ -1,9 +1,17 @@
-PROJECT(wwa-engine-unit-tests)
+project(wwa-engine-unit-tests)
 
-SET(ENGINE_DIR ${CMAKE_SOURCE_DIR}/engine)
-SET(GTEST ${CMAKE_SOURCE_DIR}/googletest/googletest/include)
+set(ENGINE_DIR ${CMAKE_SOURCE_DIR}/engine)
 
-INCLUDE_DIRECTORIES(${ENGINE_DIR} ${GTEST})
+add_executable(${PROJECT_NAME} main.cpp Test.cpp)
 
-ADD_EXECUTABLE(${PROJECT_NAME} main.cpp Test.cpp)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} PUBLIC gtest wwa-engine-graphics)
+target_link_libraries(${PROJECT_NAME}
+    PUBLIC
+        ${CONAN_LIBS_GTEST}
+        wwa-engine-graphics
+)
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${CONAN_INCLUDE_DIRS_GTEST}
+        ${ENGINE_DIR}
+)

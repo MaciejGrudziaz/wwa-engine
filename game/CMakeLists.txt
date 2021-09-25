@@ -1,20 +1,28 @@
-PROJECT(wwa-engine-game)
+project(wwa-engine-game)
 
-SET(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
-FIND_PACKAGE(Vulkan REQUIRED FATAL_ERROR)
-FIND_PACKAGE(glfw3 REQUIRED FATAL_ERROR)
+find_package(Vulkan REQUIRED FATAL_ERROR)
 
 SET(ENGINE_DIR ${CMAKE_SOURCE_DIR}/engine)
 
-INCLUDE_DIRECTORIES(${ENGINE_DIR})
-
-SET(SOURCE_FILES
+set(SOURCE_FILES
     main.cpp
 )
 
-ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} wwa-engine-graphics)
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${ENGINE_DIR}
+)
 
-TARGET_COMPILE_OPTIONS(${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Werror -O0)
+target_link_libraries(${PROJECT_NAME} wwa-engine-graphics)
+
+target_compile_options(${PROJECT_NAME}
+    PRIVATE
+        -Wall
+        -Wpedantic
+        -Werror
+        -O0
+)

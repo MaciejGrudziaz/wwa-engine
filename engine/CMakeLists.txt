@@ -1,1 +1,1 @@
-ADD_SUBDIRECTORY(graphics)
+add_subdirectory(graphics)

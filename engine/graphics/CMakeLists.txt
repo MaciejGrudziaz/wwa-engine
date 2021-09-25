@@ -1,19 +1,29 @@
-PROJECT(wwa-engine-graphics)
+project(wwa-engine-graphics)
 
-SET(GLM_DIR ${CMAKE_SOURCE_DIR}/glm)
-SET(BOOST_DIR ${CMAKE_SOURCE_DIR}/boost/libs)
-
-INCLUDE_DIRECTORIES(${GLM_DIR} ${BOOST_DIR})
-
-SET(SOURCE_FILES
+set(SOURCE_FILES
     ApplicationWindow.cpp
 )
 
-FIND_PACKAGE(Vulkan REQUIRED FATAL_ERROR)
-FIND_PACKAGE(glfw3 REQUIRED FATAL_ERROR)
+find_package(Vulkan REQUIRED FATAL_ERROR)
 
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} PUBLIC vulkan glfw dl pthread X11 Xxf86vm Xrandr Xi)
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${CONAN_INCLUDE_DIRS_GLM}
+        ${CONAN_INCLUDE_DIRS_BOOST}
+)
 
-TARGET_COMPILE_OPTIONS(${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Werror -O0)
+target_link_libraries(${PROJECT_NAME}
+    PUBLIC
+        ${CONAN_LIBS_GLFW}
+        vulkan
+        dl
+        pthread
+        X11
+        Xxf86vm
+        Xrandr
+        Xi
+)
+
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Werror -O0)
